@@ -6,8 +6,12 @@ services:
     container_name: nginx
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - /etc/nginx/conf.d
+      - /etc/nginx/vhost.d
+      - /usr/share/nginx/html
+      - ./certs:/etc/nginx/certs:ro
 
   dockergen:
     restart: always
@@ -18,3 +22,14 @@ services:
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - ./nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl
+
+  letsencrypt:
+    restart: always
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    volumes_from:
+      - nginx
+    volumes:
+      - ./certs:/etc/nginx/certs:rw
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - NGINX_DOCKER_GEN_CONTAINER=dockergen
