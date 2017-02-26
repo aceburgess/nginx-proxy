@@ -9,27 +9,35 @@ services:
       - "443:443"
     volumes:
       - /etc/nginx/conf.d
-      - /etc/nginx/vhost.d
+      - /usr/src/nginx-proxy-ssl/vhost.d:/etc/nginx/vhost.d:rw
       - /usr/share/nginx/html
-      - ./certs:/etc/nginx/certs:ro
+      - /usr/src/app/static:/usr/src/app/static:ro
+      - /usr/src/nginx-proxy-ssl/certs:/etc/nginx/certs:ro
 
   dockergen:
     restart: always
     image: jwilder/docker-gen
+    container_name: docker-gen
     command: -notify-sighup nginx -watch /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf
     volumes_from:
       - nginx
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ./nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl
+      - /usr/src/nginx-proxy-ssl/nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl
 
   letsencrypt:
     restart: always
     image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: lets-encrypt
     volumes_from:
       - nginx
     volumes:
-      - ./certs:/etc/nginx/certs:rw
+      - /usr/src/nginx-proxy-ssl/certs:/etc/nginx/certs:rw
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
-      - NGINX_DOCKER_GEN_CONTAINER=dockergen
+      - NGINX_DOCKER_GEN_CONTAINER=docker-gen
+
+networks:
+  default:
+    external:
+      name: proxy
