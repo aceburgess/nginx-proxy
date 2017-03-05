@@ -36,6 +36,17 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
       - NGINX_DOCKER_GEN_CONTAINER=docker-gen
+    
+  jenkins:
+    restart: always
+    image: jenkins
+    container_name: jenkins
+    expose:
+      - "8080"
+    volumes:
+      - /usr/src:/usr/src:rw
+    environment:
+      - VIRTUAL_HOST=jenkins.seenonvhs.com
 
 networks:
   default:
