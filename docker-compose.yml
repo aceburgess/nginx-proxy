@@ -9,7 +9,7 @@ services:
       - "443:443"
     volumes:
       - /etc/nginx/conf.d
-      - /usr/src/nginx-proxy-ssl/vhost.d:/etc/nginx/vhost.d:rw
+      - ./vhost.d:/etc/nginx/vhost.d:rw
       - /usr/share/nginx/html
       - /usr/src/app/static:/usr/src/app/static:ro
       - /usr/src/nginx-proxy-ssl/certs:/etc/nginx/certs:ro
