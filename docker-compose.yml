@@ -41,15 +41,15 @@ services:
     restart: always
     image: jenkins
     container_name: jenkins
-    expose:
-      - "8080"
-      - "50000"
+    ports:
+      - "8080:8080"
+      - "50000:50000"
     volumes:
       - /usr/src/nginx-proxy-ssl/jenkins-data:/var/jenkins_home:rw
-    environment:
-      - VIRTUAL_HOST=jenkins.seenonvhs.com
-      - LETSENCRYPT_HOST=jenkins.seenonvhs.com
-      - LETSENCRYPT_TEST=true
+    #environment:
+      #- VIRTUAL_HOST=jenkins.seenonvhs.com
+      #- LETSENCRYPT_HOST=jenkins.seenonvhs.com
+      #- LETSENCRYPT_TEST=true
 
 networks:
   default:
