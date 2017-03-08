@@ -48,6 +48,8 @@ services:
       - /usr/src/nginx-proxy-ssl/jenkins-data:/var/jenkins_home:rw
     environment:
       - VIRTUAL_HOST=jenkins.seenonvhs.com
+      - LETSENCRYPT_HOST=jenkins.seenonvhs.com
+      - LETSENCRYPT_TEST=true
 
 networks:
   default:
