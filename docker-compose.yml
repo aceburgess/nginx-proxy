@@ -43,8 +43,9 @@ services:
     container_name: jenkins
     expose:
       - "8080"
+      - "50000"
     volumes:
-      - /usr/src:/usr/src:rw
+      - /usr/src/nginx-proxy-ssl/jenkins-data:/var/jenkins_home:rw
     environment:
       - VIRTUAL_HOST=jenkins.seenonvhs.com
 
