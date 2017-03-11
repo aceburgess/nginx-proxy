@@ -9,5 +9,3 @@ location /.well-known/acme-challenge/ {
 location /static {
     alias /usr/src/app/static;
 }
-
-client_max_body_size 100M;
