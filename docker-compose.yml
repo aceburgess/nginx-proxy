@@ -8,7 +8,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - /etc/nginx/conf.d
+      - ./conf.d:/etc/nginx/conf.d:rw
       - ./proxy.conf:/etc/nginx/proxy.conf:rw
       - ./vhost.d:/etc/nginx/vhost.d:rw
       - /usr/share/nginx/html
