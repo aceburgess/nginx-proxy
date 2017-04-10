@@ -1,1 +1,1 @@
-return 301 $scheme://www.interlinerecords.com$request_uri;
+return 301 $scheme://www.camberwelldistribution.com$request_uri;
