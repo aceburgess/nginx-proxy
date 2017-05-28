@@ -7,9 +7,9 @@ location /.well-known/acme-challenge/ {
 }
 ## End of configuration add by letsencrypt container
 location /static {
-    alias /usr/src/app/static;
+    alias /usr/src/app/prod/static;
 }
 
 location /media {
-    alias /usr/src/app/media;
+    alias /usr/src/app/prod/media;
 }

@@ -12,8 +12,10 @@ services:
       - ./proxy.conf:/etc/nginx/proxy.conf:rw
       - ./vhost.d:/etc/nginx/vhost.d:rw
       - /usr/share/nginx/html
-      - /usr/src/app/media:/usr/src/app/media:ro
-      - /usr/src/app/static:/usr/src/app/static:ro
+      - /usr/src/app/dev-interline-records-api/media:/usr/src/app/dev/media:ro
+      - /usr/src/app/dev-interline-records-api/static:/usr/src/app/dev/static:ro
+      - /usr/src/app/prod-interline-records-api/media:/usr/src/app/prod/media:ro
+      - /usr/src/app/prod-interline-records-api/static:/usr/src/app/prod/static:ro
       - /usr/src/nginx-proxy-ssl/certs:/etc/nginx/certs:ro
 
   dockergen:
